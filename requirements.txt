@@ -3,3 +3,4 @@ html2text==2024.2.26
 pandas==2.2.1
 libpff-python==20231205
 beautifulsoup4==4.12.2
+pytest==7.3.1
