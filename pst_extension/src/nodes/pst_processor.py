@@ -51,9 +51,7 @@ class PSTProcessor:
             f.write(attachment_blob)
 
         return attachment_path
-    
-    def clean_html_str(self, input_str: str) -> str:
-        return re.sub(r'(\s*\\n+\s*)+', '\n', input_str[2:].replace(r"\r", ""))
+
 
     def generate_unique_hash(self, text: str) -> str:
         """

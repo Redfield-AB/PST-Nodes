@@ -4,38 +4,54 @@ import pypff
 import pandas as pd
 
 
+_category = knext.category(
+    path="/community",
+    level_id="pst",
+    name="Redfield PST Nodes",
+    description="Personal Storage Table Knime nodes",
+    icon="icons/redfield_logo.png"
+)
+
+
 @knext.node(name="PST Reader",
             node_type=knext.NodeType.SOURCE, 
             icon_path="icons/reader_icon.png", 
-            category="/")
+            category=_category)
 @knext.output_table(name="Output Table", description="PST data")
 
 
 class PSTReaderNode:
-    """ This is my first node in Knime develped purly in python"""
+    """Retrives the content of a pst file"""
     
     pst_path = knext.StringParameter(
         label="Input PST file path",
         description="The file path for reading data.",
-        default_value="",
+        default_value=""
     )
-    
+
     include_attachment = knext.BoolParameter(
         label="Extract attachments",
         description="Check the box if you want to extract the attachments",
         default_value=True
     )
+
     attachment_parent_dir = knext.StringParameter(
-        "Attachments path",
-        "Where to save the attachments",
+        label="Attachments path",
+        description="Where to save the attachments",
         default_value=""
     )
+
 
     def configure(self, config_context):
         pass
     
     def execute(self, exec_context):
 
+        if ".pst" not in self.pst_path:
+            raise knext.InvalidParametersError(
+                "Invalid PST file"
+            )
+        
         pst_processor = PSTProcessor()
         
         pst_file = pypff.file()
