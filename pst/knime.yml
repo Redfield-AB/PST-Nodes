@@ -1,0 +1,10 @@
+group_id: ai.redfield
+name: pst
+author: Abderrahim Alakouche
+env_yml_path: pst_conda_env.yml
+extension_module: src/nodes/pst_reader
+description: Personal Storage Table Extension for Knime 
+long_description: Knime nodes for reading and processing PST data.
+version: 0.1.0 
+vendor: Redfield AB, Stockholm, Sweden
+license_file: LICENSE.TXT
