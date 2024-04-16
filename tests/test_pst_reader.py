@@ -1,4 +1,4 @@
-from pst_extension.src.nodes.pst_processor import PSTProcessor
+from pst.src.nodes.pst_processor import PSTProcessor
 import pypff
 
 

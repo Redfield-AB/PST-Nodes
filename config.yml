@@ -1,4 +1,4 @@
 ai.redfield.pst:
-  src: <Local_Path>/PST-Nodes/pst_extension
-  conda_env_path: <Local_Path>/py3_knime 
+  src: <Local_Path>/PST-Nodes/pst
+  conda_env_path: <Local_Path>/my_python_env 
   debug_mode: true
