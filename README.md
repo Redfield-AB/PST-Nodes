@@ -19,7 +19,7 @@ Personal Storage Table Extension for Knime
 
 ## Installation:
 
-You can currently install the extension through the zipped update site. Once you've downloaded and unzipped the folder, follow these steps to access the extension:
+You can currently install the extension through the [zipped update site](https://drive.google.com/drive/folders/1xDHDRN0CnylSSf24QgzIbFbWg3NZnl0K?usp=sharing). Once you've downloaded and unzipped the folder, follow these steps to access the extension:
 
 - Add the unzipped folder to KNIME AP as a Software Site in File → Preferences → Install/Update → Available Software Sites
 
