@@ -25,7 +25,7 @@ PST Extension is a Knime Python based Extension, we bundle the source files toge
 - For Linux: execute the script in terminal (see [here](https://conda.io/projects/conda/en/latest/user-guide/install/linux.html) for help)
 
 
-# Update site installtion (Dev)
+# Update site installation (Dev)
 
 You can currently install the extension through the [zipped update site](https://drive.google.com/drive/folders/1xDHDRN0CnylSSf24QgzIbFbWg3NZnl0K?usp=sharing). Once you've downloaded and unzipped the folder, follow these steps to access the extension:
 
