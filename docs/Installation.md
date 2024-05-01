@@ -12,18 +12,22 @@ Download Microsoft C++ Build Tools and follow the instructions in the video belo
 
 [![Microsoft C++ Built Tools](https://img.youtube.com/vi/_keTL9ymGjw/0.jpg)](https://www.youtube.com/watch?v=_keTL9ymGjw)
 
-### 2- Install Anaconda:
+### 2- Install Conda package management system:
 
-PST Extension is a Knime Python based Extension, we bundle the source files together with the required packages using conda as the bundling channel. Here is the quickest way to setup conda:
+PST Extension is a Knime Python based Extension, we bundle the source files together with the required packages using conda as the bundling channel. 
+[Anaconda](https://docs.anaconda.com/free/miniconda/) requires a commercial license for certain business uses, particularly in large enterprises. If you are in a Corporate Environment, we addvice you to use Minforge because of the following reasons:
 
-- Go to the [Miniconda](https://docs.anaconda.com/free/miniconda/) website
+- Cost: No licensing fees or enterprise costs are associated with using Miniforge, which can be significant for large companies.
+- Customizability: You can build environments with only the packages you need, minimizing resource usage.
+- Flexibility: Since it uses Conda, you can easily manage environments and package dependencies, providing flexibility in your development and deployment workflows.
+
+To setup Miniforge:
+
+- Go to the [Miniforge](https://conda-forge.org/miniforge/) website
 
 - Download the appropriate installer for your OS
 
-- For Windows and macOS: run the installer executable
-
-- For Linux: execute the script in terminal (see [here](https://conda.io/projects/conda/en/latest/user-guide/install/linux.html) for help)
-
+![](./imgs/miniforge.png)
 
 # Update site installation (Dev)
 
