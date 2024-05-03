@@ -60,7 +60,7 @@ class PSTReaderNode:
 
         if self.include_attachment and self.attachment_parent_dir is "":
             raise knext.InvalidParametersError(
-                "Attachment path is not added"
+                "Attachment path is not specified"
             )
         
         pst_processor = PSTProcessor()
