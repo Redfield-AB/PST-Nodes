@@ -2,6 +2,7 @@ import knime.extension as knext
 from pst_processor import PSTProcessor
 import pypff
 import pandas as pd
+from utils import get_sender_info, get_recipient_info
 
 
 _category = knext.category(
@@ -41,6 +42,12 @@ class PSTReaderNode:
         default_value=""
     )
 
+    include_participant = knext.BoolParameter(
+        label="Extract sender/recipient metadata",
+        description="Check the box if you want to extract sender/recipient metadata",
+        default_value=True
+    )
+
 
     def configure(self, config_context):
         pass
@@ -64,7 +71,11 @@ class PSTReaderNode:
             include_attachment=self.include_attachment
         )
         df = pd.DataFrame(messages)
-        output_table = knext.Table.from_pandas(df)
 
+        if self.include_participant:
+            df = df.apply(get_sender_info, axis=1)
+            df = df.apply(get_recipient_info, axis=1)
+
+        output_table = knext.Table.from_pandas(df)
         return output_table
     

@@ -1,4 +1,3 @@
-import re
 import filetype
 import os
 import hashlib
@@ -155,4 +154,3 @@ class PSTProcessor:
                     })
                
         return messages
-
