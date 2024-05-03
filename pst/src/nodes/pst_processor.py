@@ -51,7 +51,6 @@ class PSTProcessor:
 
         return attachment_path
 
-
     def generate_unique_hash(self, text: str) -> str:
         """
         Generates a unique hash for a given text.

@@ -5,6 +5,7 @@ import pandas as pd
 from utils import get_sender_info, get_recipient_info
 
 
+
 _category = knext.category(
     path="/community",
     level_id="pst",
@@ -12,7 +13,6 @@ _category = knext.category(
     description="Personal Storage Table Knime nodes",
     icon="icons/redfield_logo.png"
 )
-
 
 @knext.node(name="PST Reader",
             node_type=knext.NodeType.SOURCE, 
@@ -48,7 +48,6 @@ class PSTReaderNode:
         default_value=True
     )
 
-
     def configure(self, config_context):
         pass
     
@@ -58,13 +57,17 @@ class PSTReaderNode:
             raise knext.InvalidParametersError(
                 "Invalid PST file"
             )
+
+        if self.include_attachment and self.attachment_parent_dir is "":
+            raise knext.InvalidParametersError(
+                "Attachment path is not added"
+            )
         
         pst_processor = PSTProcessor()
         
         pst_file = pypff.file()
         pst_file.open(self.pst_path)
         base_folder = pst_file.get_root_folder()
-
         messages = pst_processor.get_pst_content(
             base_folder=base_folder,
             attachment_parent_dir=self.attachment_parent_dir,
