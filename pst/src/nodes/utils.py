@@ -38,7 +38,7 @@ def get_sender_info(row):
 
 def get_recipient_info(row):
     """
-    Extract recipeint name and email
+    Extract recipient name and email
     """
     try:
         recipient_matches = []
