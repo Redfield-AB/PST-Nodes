@@ -22,30 +22,39 @@ _category = knext.category(
 
 
 class PSTReaderNode:
-    """Retrives the content of a pst file"""
+    """Retrives the content of a PST file
+    
+    This node reads PST (Personal Storage Table) files (.pst). 
+    
+    Starting from the root folder, the node traverses through each folder in the PST file. For each folder encountered, it examines its contents, which may include subfolders and individual messages. 
+    Each message has a unique ID, which is used as the folder name where that message's attachments are stored.
+    You can choose whether or not to extract attachments. 
+    
+    If attachments are extracted, the `Attachments` column will provide the exact location of each attachment object.
+    """
     
     pst_path = knext.StringParameter(
         label="Input PST file path",
-        description="The file path for reading data.",
+        description="The path of the PST file to read data from",
         default_value=""
     )
 
     include_attachment = knext.BoolParameter(
         label="Extract attachments",
-        description="Check the box if you want to extract the attachments",
-        default_value=True
+        description="Check the box if you want to extract attachments",
+        default_value=False
     )
 
     attachment_parent_dir = knext.StringParameter(
         label="Attachments path",
-        description="Where to save the attachments",
+        description="Where would you like to save the attachments?",
         default_value=""
     )
 
     include_participant = knext.BoolParameter(
-        label="Extract sender/recipient metadata",
-        description="Check the box if you want to extract sender/recipient metadata",
-        default_value=True
+        label="Extract sender and recipient metadata",
+        description="Check the box if you want to extract sender and recipient metadata",
+        default_value=False
     )
 
     def configure(self, config_context):
@@ -64,17 +73,20 @@ class PSTReaderNode:
             )
         
         pst_processor = PSTProcessor()
-        
         pst_file = pypff.file()
         pst_file.open(self.pst_path)
         base_folder = pst_file.get_root_folder()
+
+        exec_context.set_progress(progress=0.25)
         messages = pst_processor.get_pst_content(
             base_folder=base_folder,
             attachment_parent_dir=self.attachment_parent_dir,
             include_attachment=self.include_attachment
         )
-        df = pd.DataFrame(messages)
 
+        exec_context.set_progress(progress=0.75)
+        df = pd.DataFrame(messages)
+        
         if self.include_participant:
             df = df.apply(get_sender_info, axis=1)
             df = df.apply(get_recipient_info, axis=1)

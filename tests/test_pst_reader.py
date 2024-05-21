@@ -29,3 +29,4 @@ def test_email_extraction():
     assert df["sender_email"][0] == "from@domain.com"
     assert df["recipient_email"][0] == "to1@domain.com"
     assert df["recipient_name"][0] == "Recipient 1"
+    assert df['message_category'][0] == "myInbox"
