@@ -10,7 +10,7 @@ _category = knext.category(
     path="/community",
     level_id="pst",
     name="Redfield PST Nodes",
-    description="Personal Storage Table Knime nodes",
+    description="Personal Storage Table Knime Nodes",
     icon="icons/redfield_logo.png"
 )
 

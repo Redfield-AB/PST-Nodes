@@ -82,7 +82,7 @@ class PSTProcessor:
             else:
                 return BeautifulSoup(str(message.html_body.decode(encoding)), "html.parser").text.strip()
         except:
-             return "Unable to retrieve the message text"
+             return ""
 
 
     def get_pst_content(self, 
@@ -116,7 +116,7 @@ class PSTProcessor:
 
                 text2hash = ''.join((str(message.subject), message_text, str(message.creation_time))) 
                 message_id = self.generate_unique_hash(text2hash)
-
+                message_dir=str(folder.name)
                 try: 
                     number_of_attachments =  message.number_of_attachments
                 except:
@@ -133,7 +133,7 @@ class PSTProcessor:
                                                 attachment_blob=attachment_blob,
                                                 attachment_id=str(attachment_id),
                                                 attachment_extension=attachment_extension,
-                                                message_dir=str(folder.name),
+                                                message_dir=message_dir,
                                                 message_id=message_id)
                         attachments.append(attachment_path)
 
@@ -143,7 +143,7 @@ class PSTProcessor:
                         "sender": message.sender_name,
                         "header": message.transport_headers,
                         "message_text": message_text,
-                        "message_category": str(folder.name),
+                        "message_category": message_dir,
                         "creation_time": message.creation_time,
                         "submit_time": message.client_submit_time,
                         "delivery_time": message.delivery_time,
@@ -158,7 +158,7 @@ class PSTProcessor:
                         "sender": message.sender_name,
                         "header": message.transport_headers,
                         "message_text": message_text,
-                        "message_category": str(folder.name),
+                        "message_category": message_dir,
                         "creation_time": message.creation_time,
                         "submit_time": message.client_submit_time,
                         "delivery_time": message.delivery_time
