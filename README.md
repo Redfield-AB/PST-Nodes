@@ -17,19 +17,10 @@ Personal Storage Table Extension for Knime
 
 
 
-## Installation:
+We recognize the challenges of managing PST files. To address this, we are introducing Redfield PST Nodes. This extension enables users to concentrate on data analysis rather than the technical difficulties of accessing and reading the data. 
 
-You can currently install the extension through the [zipped update site](https://drive.google.com/drive/folders/1xDHDRN0CnylSSf24QgzIbFbWg3NZnl0K?usp=sharing). Once you've downloaded and unzipped the folder, follow these steps to access the extension:
+The extesnion can be installed via the [Knime Hub](https://hub.knime.com/redfield/extensions/ai.redfield.features.pst/latest) by dragging and dropping the node icon or installed via the Knime Extension Manager.
 
-- Add the unzipped folder to KNIME AP as a Software Site in File → Preferences → Install/Update → Available Software Sites
-
-- Go to Install KNIME Extensions and search for `personal storage table `
-
-<video width="820" height="440" controls>
-    <source src="./.static/pst demo.mov" type="video/mp4">
-</video>
-
-![](./.static/pst%20demo.mov)
 
 ## Devlopement 🚀
 
