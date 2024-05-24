@@ -29,7 +29,11 @@ To setup Miniforge:
 
 ![](./imgs/miniforge.png)
 
-# Update site installation (Dev)
+# Installation
+
+The extesnion can be installed via the [Knime Hub](https://hub.knime.com/redfield/extensions/ai.redfield.features.pst/latest) by dragging and dropping the node icon or installed via the Knime Extension Manager.
+
+# Update site installation (Only for development purposes)
 
 You can currently install the extension through the [zipped update site](https://drive.google.com/drive/folders/1xDHDRN0CnylSSf24QgzIbFbWg3NZnl0K?usp=sharing). Once you've downloaded and unzipped the folder, follow these steps to access the extension:
 
