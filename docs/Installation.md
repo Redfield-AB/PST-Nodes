@@ -6,7 +6,7 @@ The PST Extension is build on top of `libpff-python`, a Python library for acces
 
 ### 1- Install C++ Built Tools for Windows:
 
-Building `libpff-python` libarary requires having C++ Built Tools installed on you Operating System.
+Building `libpff-python` libarary requires having C++ Built Tools installed on your Operating System.
 
 Download Microsoft C++ Build Tools and follow the instructions in the video below to complete the installation:
 
