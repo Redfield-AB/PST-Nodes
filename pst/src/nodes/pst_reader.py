@@ -31,6 +31,8 @@ class PSTReaderNode:
     You can choose whether or not to extract attachments. 
     
     If attachments are extracted, the `Attachments` column will provide the exact location of each attachment object.
+
+    PST Reader is using `libpff-python` libarary which requires having C++ Built Tools installed on your Operating System.
     """
     
     pst_path = knext.StringParameter(
