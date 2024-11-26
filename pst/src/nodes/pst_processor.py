@@ -1,6 +1,6 @@
-import re
 import filetype
 import os
+import uuid
 import hashlib
 from bs4 import BeautifulSoup
 
@@ -39,11 +39,12 @@ class PSTProcessor:
                         message_dir,
                         message_id) -> str:
         
-        attachment_dir = "/".join((attachment_parent_dir, message_dir, message_id))
+        attachment_dir = os.path.join(attachment_parent_dir, message_dir, message_id)
+        
         if attachment_extension:
-            attachment_path = "/".join((attachment_dir, attachment_id)) + "." + attachment_extension
+            attachment_path = os.path.join(attachment_dir, attachment_id) + "." + attachment_extension
         else: 
-            attachment_path = "/".join((attachment_dir, attachment_id))
+            attachment_path = os.path.join(attachment_dir, attachment_id)
 
         if not os.path.exists(attachment_dir):
             os.makedirs(attachment_dir)
@@ -51,7 +52,6 @@ class PSTProcessor:
             f.write(attachment_blob)
 
         return attachment_path
-
 
     def generate_unique_hash(self, text: str) -> str:
         """
@@ -62,20 +62,28 @@ class PSTProcessor:
         Returns: 
             str: A unique hash value.
         """
-        standardized_text = text.lower().strip()
-        hash_object = hashlib.sha256(standardized_text.encode())
-        hash_value = str(hash_object.hexdigest())
+        try: 
+            standardized_text = text.lower().strip()
+            hash_object = hashlib.sha256(standardized_text.encode())
+            hash_value = str(hash_object.hexdigest())
 
-        return hash_value
+            return hash_value
+        except:
+            return str(uuid.uuid1())
 
-    def get_message_text(self, message) -> str:
+
+    def get_message_text(self, message, encoding='ISO-8859-1') -> str:
         """
         Extract text for a given text.
         """
-        if message.plain_text_body:
-            return str(message.plain_text_body)
-        else:
-            return BeautifulSoup(str(message.html_body), "html.parser").text
+        try: 
+            if message.plain_text_body:
+                return message.plain_text_body.decode(encoding).strip()
+            else:
+                return BeautifulSoup(str(message.html_body.decode(encoding)), "html.parser").text.strip()
+        except:
+             return ""
+
 
     def get_pst_content(self, 
                         base_folder: str,  
@@ -106,9 +114,9 @@ class PSTProcessor:
                 attachments = []
                 message_text = self.get_message_text(message)
 
-                text2hash = str(message.subject) + message_text + str(message.creation_time) 
+                text2hash = ''.join((str(message.subject), message_text, str(message.creation_time))) 
                 message_id = self.generate_unique_hash(text2hash)
-
+                message_dir=str(folder.name)
                 try: 
                     number_of_attachments =  message.number_of_attachments
                 except:
@@ -125,7 +133,7 @@ class PSTProcessor:
                                                 attachment_blob=attachment_blob,
                                                 attachment_id=str(attachment_id),
                                                 attachment_extension=attachment_extension,
-                                                message_dir=str(folder.name),
+                                                message_dir=message_dir,
                                                 message_id=message_id)
                         attachments.append(attachment_path)
 
@@ -135,6 +143,7 @@ class PSTProcessor:
                         "sender": message.sender_name,
                         "header": message.transport_headers,
                         "message_text": message_text,
+                        "message_category": message_dir,
                         "creation_time": message.creation_time,
                         "submit_time": message.client_submit_time,
                         "delivery_time": message.delivery_time,
@@ -149,10 +158,10 @@ class PSTProcessor:
                         "sender": message.sender_name,
                         "header": message.transport_headers,
                         "message_text": message_text,
+                        "message_category": message_dir,
                         "creation_time": message.creation_time,
                         "submit_time": message.client_submit_time,
                         "delivery_time": message.delivery_time
                     })
                
         return messages
-
